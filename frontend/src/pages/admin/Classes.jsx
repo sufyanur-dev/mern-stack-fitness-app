@@ -81,6 +81,8 @@ const Classes = () => {
     }
   };
 
+  const todayDate = new Date().toISOString().split("T")[0];
+
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
@@ -104,34 +106,42 @@ const Classes = () => {
             </tr>
           </thead>
           <tbody>
-            {classes.map((cls) => (
-              <tr key={cls._id}>
-                <td className="p-2 border">{cls.name}</td>
-                <td className="p-2 border">{cls.description}</td>
-                <td className="p-2 border">{cls.schedule.split("T")[0]}</td>
-                <td className="p-2 border">{cls.capacity}</td>
-                <td className="p-2 border space-x-2 space-y-1.5">
-                  <button
-                    onClick={() => openModal(cls)}
-                    className="bg-yellow-500 text-white px-2 py-1 rounded"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(cls._id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    onClick={() => handleViewMembers(cls)}
-                    className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                  >
-                    View Members
-                  </button>
+            {classes.length > 0 ? (
+              classes.map((cls) => (
+                <tr key={cls._id}>
+                  <td className="p-2 border">{cls.name}</td>
+                  <td className="p-2 border">{cls.description}</td>
+                  <td className="p-2 border">{cls.schedule.split("T")[0]}</td>
+                  <td className="p-2 border">{cls.capacity}</td>
+                  <td className="p-2 border space-x-2 space-y-1.5">
+                    <button
+                      onClick={() => openModal(cls)}
+                      className="bg-yellow-500 text-white px-2 py-1 rounded"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(cls._id)}
+                      className="bg-red-500 text-white px-2 py-1 rounded"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={() => handleViewMembers(cls)}
+                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                    >
+                      View Members
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className=" p-2 border text-center">
+                  No data available
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -167,6 +177,7 @@ const Classes = () => {
                 onChange={handleChange}
                 className="border p-2 w-full"
                 required
+                min={todayDate}
               />
 
               <input

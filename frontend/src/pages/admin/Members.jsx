@@ -102,26 +102,34 @@ const Members = () => {
               </tr>
             </thead>
             <tbody>
-              {members.map((m) => (
-                <tr key={m._id}>
-                  <td className="p-2 border">{m.name}</td>
-                  <td className="p-2 border">{m.email}</td>
-                  <td className="p-2 border space-y-1.5">
-                    <button
-                      onClick={() => handleEditMember(m)}
-                      className="bg-blue-500 text-white px-3 py-1 rounded mr-2"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(m._id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded"
-                    >
-                      Delete
-                    </button>
+              {members.length > 0 ? (
+                members.map((m) => (
+                  <tr key={m._id}>
+                    <td className="p-2 border">{m.name}</td>
+                    <td className="p-2 border">{m.email}</td>
+                    <td className="p-2 border space-y-1.5">
+                      <button
+                        onClick={() => handleEditMember(m)}
+                        className="bg-blue-500 text-white px-3 py-1 rounded mr-2"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(m._id)}
+                        className="bg-red-500 text-white px-3 py-1 rounded"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3" className="text-center p-2 border">
+                    No data available
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

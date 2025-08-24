@@ -39,7 +39,11 @@ const ClassesDetails = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setEnrollMsg(res.data.message);
-      setClassDetails(res.data.class); // update members list
+      // ✅ Update local state instantly
+      setClassDetails((prev) => ({
+        ...prev,
+        members: [...prev.members, user], // add current user to members
+      }));
     } catch (err) {
       setEnrollMsg(err.response?.data?.message || "Enrollment failed");
     }
